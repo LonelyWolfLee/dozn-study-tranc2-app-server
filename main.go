@@ -10,10 +10,10 @@ import (
 
 func main() {
 
-	logger.LOG.Trace("Starting the application...")
-	logger.LOG.Info("Something noteworthy happened...")
-	logger.LOG.Warn("There is something you should know about...")
-	logger.LOG.Error("Something went wrong...")
+	logger.LOG.Trace.Println("Starting the application...")
+	logger.LOG.Info.Println("Something noteworthy happened...")
+	logger.LOG.Warn.Println("There is something you should know about...")
+	logger.LOG.Error.Println("Something went wrong...")
 
 	// Echo instance
 	e := echo.New()

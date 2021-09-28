@@ -7,26 +7,10 @@ import (
 )
 
 type Logger struct {
-	trace *log.Logger
-	info  *log.Logger
-	warn  *log.Logger
-	error *log.Logger
-}
-
-func (l *Logger) Trace(message string) {
-	l.trace.Println(message)
-}
-
-func (l *Logger) Info(message string) {
-	l.info.Println(message)
-}
-
-func (l *Logger) Warn(message string) {
-	l.warn.Println(message)
-}
-
-func (l *Logger) Error(message string) {
-	l.error.Println(message)
+	Trace *log.Logger
+	Info  *log.Logger
+	Warn  *log.Logger
+	Error *log.Logger
 }
 
 func get() Logger {
