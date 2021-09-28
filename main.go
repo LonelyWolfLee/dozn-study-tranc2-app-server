@@ -1,35 +1,33 @@
 package main
 
 import (
-	"dozn/app-server/logger"
-	"net/http"
+	"dozn/app-server/utils"
 
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
 func main() {
 
-	logger.LOG.Trace.Println("Starting the application...")
-	logger.LOG.Info.Println("Something noteworthy happened...")
-	logger.LOG.Warn.Println("There is something you should know about...")
-	logger.LOG.Error.Println("Something went wrong...")
+	utils.LOG.Trace.Println("Starting the application...")
+	utils.LOG.Info.Println("Something noteworthy happened...")
+	utils.LOG.Warn.Println("There is something you should know about...")
+	utils.LOG.Error.Println("Something went wrong...")
 
 	// Echo instance
-	e := echo.New()
+	app := fiber.New()
 
 	// Middleware
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	app.Use(logger.New())
 
 	// Routes
-	e.GET("/", hello)
+	app.Get("/", hello)
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	app.Listen(":3000")
 }
 
 // Handler
-func hello(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
+func hello(c *fiber.Ctx) error {
+	return c.SendString("Hello, World!")
 }
