@@ -6,7 +6,7 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-func doRequest(url string, method string, body string) {
+func doRequest(url string, method string, body []byte) {
 	req := fasthttp.AcquireRequest()
 	resp := fasthttp.AcquireResponse()
 	defer fasthttp.ReleaseRequest(req)
@@ -14,12 +14,11 @@ func doRequest(url string, method string, body string) {
 
 	req.SetRequestURI(url)
 	req.Header.SetMethod(method)
-	req.SetBodyString(body)
+	req.Header.SetContentType("application/json")
+	req.SetBody(body)
 
 	fasthttp.Do(req, resp)
 
 	bodyBytes := resp.Body()
 	fmt.Println(string(bodyBytes))
-	// User-Agent: fasthttp
-	// Body:
 }
