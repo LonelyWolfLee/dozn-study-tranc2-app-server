@@ -13,5 +13,5 @@ func Warn(message string) {
 }
 
 func Error(message string) {
-	logger.error.Println(message)
+	logger.error.Fatalln(message)
 }
