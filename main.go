@@ -2,17 +2,17 @@ package main
 
 import (
 	"dozn/app-server/logging"
+	"dozn/app-server/services/account"
+	"dozn/app-server/services/auth"
+	"dozn/app-server/services/transaction"
+	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
 func main() {
-
-	logging.Trace("Starting the application...")
-	logging.Info("Something noteworthy happened...")
-	logging.Warn("There is something you should know about...")
-	logging.Error("Something went wrong...")
+	logging.Info("Preparing server...")
 
 	// Echo instance
 	app := fiber.New()
@@ -21,6 +21,9 @@ func main() {
 	app.Use(logger.New())
 
 	// Routes
+	logging.Info("Setup route configurations...")
+	api := app.Group("/api")
+
 	// 1. Registration (User)
 	// 2. Login (User)
 	// 3. Auto login (User)
@@ -29,13 +32,11 @@ func main() {
 	// 6. Transaction list for one bank account (User, Account, Transaction)
 	// 7. Money tranfer (User, Account, Transaction)
 	// 8. Deposit (User, Account, Transaction)
-	app.Get("/", hello)
+	auth.SetupRoutes(api.Group("/auth"))
+	account.SetupRoutes(api.Group("/account"))
+	transaction.SetupRoutes(api.Group("/transaction"))
 
 	// Start server
-	app.Listen(":3000")
-}
-
-// Handler
-func hello(c *fiber.Ctx) error {
-	return c.SendString("Hello, World!")
+	logging.Info("Start server...")
+	log.Fatal(app.Listen(":3000"))
 }
