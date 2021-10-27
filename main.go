@@ -30,8 +30,9 @@ func main() {
 	// 4. Create bank account (User, Account)
 	// 5. Get bank accounts (User, Account)
 	// 6. Transaction list for one bank account (User, Account, Transaction)
-	// 7. Money tranfer (User, Account, Transaction)
-	// 8. Deposit (User, Account, Transaction)
+	// 7. Deposit (User, Account, Transaction)
+	// 8. Money tranfer (User, Account, Transaction)
+
 	auth.SetupRoutes(api.Group("/auth"))
 	account.SetupRoutes(api.Group("/account"))
 	transaction.SetupRoutes(api.Group("/transaction"))

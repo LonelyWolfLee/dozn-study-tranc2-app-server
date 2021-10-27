@@ -1,11 +1,11 @@
 package account
 
-import (
-	"dozn/app-server/logging"
+import "github.com/gofiber/fiber/v2"
 
-	"github.com/gofiber/fiber/v2"
-)
+func create(context *fiber.Ctx) error {
+	return context.SendString("ACCOUNT : create")
+}
 
-func SetupRoutes(router fiber.Router) {
-	logging.Info("Setup account router...")
+func list(context *fiber.Ctx) error {
+	return context.SendString("ACCOUNT : list")
 }
