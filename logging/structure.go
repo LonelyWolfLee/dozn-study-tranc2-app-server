@@ -1,4 +1,4 @@
-package utils
+package logging
 
 import (
 	"io/ioutil"
@@ -6,15 +6,15 @@ import (
 	"os"
 )
 
-type Logger struct {
-	Trace *log.Logger
-	Info  *log.Logger
-	Warn  *log.Logger
-	Error *log.Logger
+type logStruct struct {
+	trace *log.Logger
+	info  *log.Logger
+	warn  *log.Logger
+	error *log.Logger
 }
 
-func get() Logger {
-	l := Logger{
+func get() logStruct {
+	l := logStruct{
 		log.New(ioutil.Discard, "[TRACE] ", log.Ldate|log.Ltime|log.Lshortfile),
 		log.New(os.Stdout, "[INFO] ", log.Ldate|log.Ltime|log.Lshortfile),
 		log.New(os.Stdout, "[WARN] ", log.Ldate|log.Ltime|log.Lshortfile),
@@ -24,4 +24,4 @@ func get() Logger {
 	return l
 }
 
-var LOG = get()
+var logger = get()
