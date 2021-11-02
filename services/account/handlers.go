@@ -1,8 +1,15 @@
 package account
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"dozn/app-server/services/auth"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func create(context *fiber.Ctx) error {
+	err := auth.Verify("token")
+
+	Create()
 	return context.SendString("ACCOUNT : create")
 }
 
