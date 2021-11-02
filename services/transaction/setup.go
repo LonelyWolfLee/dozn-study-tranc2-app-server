@@ -9,7 +9,7 @@ import (
 func SetupRoutes(router fiber.Router) {
 	logging.Info("Setup transaction router...")
 
-	router.Post("/list", list)
+	router.Get("/", list)
 	router.Post("/deposit", deposit)
 	router.Post("/transfer", transfer)
 }

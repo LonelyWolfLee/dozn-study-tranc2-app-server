@@ -9,6 +9,7 @@ import (
 func SetupRoutes(router fiber.Router) {
 	logging.Info("Setup account router...")
 
-	router.Post("/create", create)
-	router.Post("/list", list)
+	router.Post("/create/", create)
+	router.Get("/:accountId", getOne)
+	router.Get("/", list)
 }

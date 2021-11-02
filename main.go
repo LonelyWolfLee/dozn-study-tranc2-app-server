@@ -34,8 +34,8 @@ func main() {
 	// 8. Money tranfer (User, Account, Transaction)
 
 	auth.SetupRoutes(api.Group("/auth"))
-	account.SetupRoutes(api.Group("/account"))
-	transaction.SetupRoutes(api.Group("/transaction"))
+	account.SetupRoutes(api.Group("/accounts"))
+	transaction.SetupRoutes(api.Group("/transactions"))
 
 	// Start server
 	logging.Info("Start server...")
