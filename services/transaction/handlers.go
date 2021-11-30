@@ -3,6 +3,7 @@ package transaction
 import "github.com/gofiber/fiber/v2"
 
 func list(context *fiber.Ctx) error {
+	Client()
 	return context.SendString("TRANSACTION : list")
 }
 
