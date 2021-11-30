@@ -1,8 +1,6 @@
 package account
 
 import (
-	"strings"
-
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -11,9 +9,7 @@ func create(context *fiber.Ctx) error {
 }
 
 func list(context *fiber.Ctx) error {
-	path := strings.Join(strings.Split(context.Path(), "/")[3:], "/")
+	res := doRequest("http://localhost:3001/list", context.Method(), context.Body())
 
-	doRequest("http://localhost:3001/"+path, context.Method(), context.Body())
-
-	return context.Next()
+	return context.SendString(res)
 }
