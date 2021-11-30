@@ -1,17 +1,18 @@
 package transaction
 
 import (
+	"dozn/app-server/logging"
 	"fmt"
 	"net"
 	"time"
 )
 
-func Client() {
+func client() {
 	conn, err := net.Dial("tcp", "127.0.0.1:8080")
 	if err != nil {
-		fmt.Println("Faield to Dial : ", err)
+		logging.Error(fmt.Sprintf("Faield to Dial : %v", err))
 	}
-	fmt.Println("Connect Server !")
+	logging.Info("Connect Server !")
 
 	defer conn.Close()
 
@@ -20,7 +21,7 @@ func Client() {
 		for {
 			_, err = c.Write([]byte(send))
 			if err != nil {
-				fmt.Println("Failed to write data : ", err)
+				logging.Error(fmt.Sprintf("Failed to write data : %v", err))
 				break
 			}
 
@@ -34,11 +35,12 @@ func Client() {
 		for {
 			n, err := c.Read(recv)
 			if err != nil {
-				fmt.Println("Failed to Read data : ", err)
+				logging.Error(fmt.Sprintf("Failed to Read data : %v", err))
+				fmt.Println()
 				break
 			}
 
-			fmt.Println(string(recv[:n]))
+			logging.Info(fmt.Sprintf("Receive data : %s", string(recv[:n])))
 		}
 	}(conn)
 
