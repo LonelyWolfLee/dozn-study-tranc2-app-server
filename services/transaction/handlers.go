@@ -3,16 +3,16 @@ package transaction
 import "github.com/gofiber/fiber/v2"
 
 func list(context *fiber.Ctx) error {
-	client()
+	client("list")
 	return context.SendString("TRANSACTION : list")
 }
 
 func deposit(context *fiber.Ctx) error {
-	client()
+	client("deposit")
 	return context.SendString("TRANSACTION : deposit")
 }
 
 func transfer(context *fiber.Ctx) error {
-	client()
+	client("transfer")
 	return context.SendString("TRANSACTION : transfer")
 }

@@ -4,10 +4,9 @@ import (
 	"dozn/app-server/logging"
 	"fmt"
 	"net"
-	"time"
 )
 
-func client() {
+func client(request string) {
 	conn, err := net.Dial("tcp", "127.0.0.1:8080")
 	if err != nil {
 		logging.Error(fmt.Sprintf("Faield to Dial : %v", err))
@@ -17,15 +16,14 @@ func client() {
 	defer conn.Close()
 
 	go func(c net.Conn) {
-		send := "Transaction"
+		send := request
 		for {
 			_, err = c.Write([]byte(send))
 			if err != nil {
 				logging.Error(fmt.Sprintf("Failed to write data : %v", err))
 				break
 			}
-
-			time.Sleep(1 * time.Second)
+			break
 		}
 	}(conn)
 
@@ -39,10 +37,8 @@ func client() {
 				fmt.Println()
 				break
 			}
-
 			logging.Info(fmt.Sprintf("Receive data : %s", string(recv[:n])))
+			break
 		}
 	}(conn)
-
-	fmt.Scanln()
 }
